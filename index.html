@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-    <title>Guida installazione profilo wheelchair in OsmAnd</title>
+    <title>Wheelchair in OsmAnd</title>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
     <link href="https://use.fontawesome.com/4c3446f59f.css" media="all" rel="stylesheet">
@@ -19,15 +19,23 @@
 				<div class="col-md-12">
 					<p class="my-auto" style="font-size: 2rem; text-align: center">Guida all'installazione del profilo di navigazione wheelchair in <b>OsmAnd</b></p>
 					<br>
-					<p class="my-auto" style="text-align: center">
-						Di seguito è riportata la procedure per inserire il profilo di routing sedia a rotelle all'interno dell'app OsmAnd. Ad ora (agosto 2020) la funzione è disponibile solo su dispositivi Android. 
-						<br>
-						Si considera che l'utente abbia già l'app già scaricata e con una mappa già configurata. È stata creata una area di test in una zona fittizia in mezzo al mare che è possibile usare per test. La procedura per l'inserimento di tale mappa è riportato alla fine della guida.
+					<p class="my-auto">
+						Di seguito è riportata la procedure per inserire il profilo di routing sedia a rotelle all'interno dell'app OsmAnd. Ad ora (agosto 2020) la funzione è disponibile solo su dispositivi Android. Si considera che l'utente abbia già l'app già scaricata e con una mappa già configurata. È stata creata una area di test in una zona fittizia in mezzo al mare che è possibile usare per test. La procedura per l'inserimento di tale mappa è riportato alla fine della guida.
+					</p>
+					<p class="my-auto">
+						Per installare il router è necessario scaricare questo <a href="routing_wheelchair_it.xml" download>file</a> e salvarlo nella cartella <b>Download</b> del telefono.
 					</p>
 				</div>
 			</div>
 		</div>
-
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="my-auto" style="font-size: 1.5rem; text-align: center">Creazione del router</p>
+				</div>
+			</div>
+		</div>
 		<br>
 		<div class="container">
 			<div class="row">
@@ -109,7 +117,7 @@
 				</div>
 				<div class="col-md-4">
 					<p class="my-auto" style="text-align: center">
-						Cliccare ora su <b>Tipo di navigazione</b>.
+						Cliccare ora su <br><b>Tipo di navigazione</b>.
 					</p>
 					<p style="text-align: center">
 	                	<img class="img-fluid" style="max-height: 400px;margin-top: 1rem; margin-bottom: 1rem" src="img/img09.jpeg">
@@ -243,7 +251,7 @@
 				</div>
 				<div class="col-md-4">
 					<p class="my-auto" style="text-align: center">
-						Tra le opzioni sarà possibile selezionare diversi parametri d'interesse per le sedie a rotelle, in seguito una spiegazione più dettagliata.
+						Tra le opzioni sarà possibile selezionare diversi parametri d'interesse per le sedie a rotelle.
 					</p>
 					<p style="text-align: center">
 	                	<img class="img-fluid" style="max-height: 400px;margin-top: 1rem; margin-bottom: 1rem" src="img/img22.jpeg">
@@ -256,14 +264,46 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<p class="my-auto" style="text-align: center">
-						I 
+					<p class="my-auto">
+						I parametri che possono essere attivate per la sedia a rotelle riguardano:
+					</p>
+					<ul class="my-auto">
+						<li>
+							Massima altezza del <b>cordolo</b> che è possibile superare;
+						</li>
+						<li>
+							La <b>larghezza</b> della sedia a rotelle;
+						</li>
+						<li>
+							Possibilità di utilizzare anche <b>strade urbane</b>, nel caso in cui non siano presenti dati di marciapiedi.
+						</li>
+					</ul>
+					<p class="my-auto">
+						Per i primi due parametri oltre ad inserire il valore tra quelli proposti è necessario spuntare l'opzione di utilizzo.
 					</p>
 				</div>
 			</div>
 		</div>
 
+		<br>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="my-auto" style="font-size: 1.5rem; text-align: center">Inserimento dei dati nell'area di test</p>
+					<br>
+					<p class="my-auto">
+						Per aggiungere l'area di test serve scaricare questo <a href="Test_area.obf" download>file</a> e inserirlo nel telefono 
+						<ul class="my-auto">
+							<li>se i file dell'app sono nella memoria interna del telefono salvare il file nella cartella: /Android/data/net.osmand/files/</li>
+							<li>se i file sono in una scheda sd: sdcard/Android/data/net.osmand/files/</li>
+						</ul>
+						Una volta inserito il file è necessario chiudere l'applicazione e riaprirla. I dati si troveranno alle coordinate <b>43.77562 9.52450</b> ed è possibile raggiungerle con la funzione cerca, rappresentata dalla lente d'ingrandimento.
+						Nel caso in cui non siano visibili i dati serve recarsi nel menù principale, nel menu <b>Scarica mappe</b> andare sotto il pannello <b>Nel dispositivo</b> selezionare <b>Disattiva</b> dalla mappa chiamata "Test area" e poi in seguito cliccare su <b>Attiva</b>.
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
-
 </html>
