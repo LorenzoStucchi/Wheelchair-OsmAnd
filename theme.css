@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Lobster Two");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/css?family=Indie Flower");
+@import url("https://fonts.googleapis.com/css?family=Unica One");
+
+body {
+  margin: 0;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #000000;
+  text-align: left;
+  background-color:   rgba(255, 128, 0, 0.6); }
+
+#twitter_logo:hover {color: aqua;}
+#github_logo:hover {color: white;}
+#gitlab_logo:hover {color: orangered;}
+#linkedin_logo:hover {color: blue;}
+#orcid_logo:hover {color: rgb(166, 206, 57);}
+
+a {
+  color: black;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects; }
+  a:hover {
+    color: white;
+    text-decoration: underline; }
+
+.text-dark {
+  color: #00652f !important;
+  text-decoration: double}

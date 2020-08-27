@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<osmand_routing_config defaultProfile="car" name="default">
+	<!-- 1. parameters of routing and different tweaks Influence on A* : -->
+	<!-- f(x) + heuristicCoefficient*g(X) -->
+	<!-- TEMPORARY needs to be reverted to 1 -->
+	<attribute name="heuristicCoefficient" value="" />
+
+	<!-- 1.1 tile load parameters (should not affect routing) -->
+	<!-- by default 16 -->
+	<attribute name="zoomToLoadTiles" value="16" />
+	<!--  by default it is 30. Value specified here overwrites all others
+			 (don't specify here ! it is device dependent)  -->
+	<attribute name="memoryLimitInMB" value="" />
+	<attribute name="nativeMemoryLimitInMB" value="" />
+
+	<!-- 1.2 Build A* graph in backward/forward direction (can affect results) -->
+	<!-- 0 - 2 ways, 1 - direct way, -1 - reverse way -->
+	<attribute name="planRoadDirection" value="0" />
+
+	<!-- 1.3 When there is a query to recalculate route, -->
+	<!-- recalculate smart using old route within N-meters (0 recalculate fresh, default 10km)  -->
+	<attribute name="recalculateDistanceHelp" value="10000" />
+
+	<routingProfile name="wheelchair" baseProfile="wheelchair" restrictionsAware="false" minSpeed="2" defaultSpeed="4" maxSpeed="8" leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="false">
+
+		<attribute name="heuristicCoefficient" value="1.2" />
+		<!-- NEW ROUTING API -->
+		<parameter id="allow_kerb_height" name="Allow considering kerb height" description="Allow considering kerb height" type="boolean"/>
+		<parameter id="max_kerb" name="Max kerb height" description="Maximum kerb height it is possible to overcome" type="numeric" values="0,0.019,0.029,0.049" valueDescriptions="0cm,2cm,3cm,5cm"/>
+		<parameter id="allow_width_wheelchair" name="Allow considering width of the wheelchair" description="Allow considering width of the wheelchair" type="boolean"/>
+		<parameter id="width_wheel" name="Max width wheelchair" description="Max width wheelchair" type="numeric" values="0.89,1.19,1.49" valueDescriptions="90cm,1.2m,1.5m"/>
+		
+		<parameter id="allow_res_streets" name="Allow residential streets" description="Allow residential streets" type="boolean" default="false"/>
+		
+		<parameter id="allow_private" name="Allow private access" description="Allow access to private areas" type="boolean"/>
+		<parameter id="allow_ferries" name="Allow ferries" description="Allow ferries" type="boolean"/>
+
+		<parameter id="height_obstacles" name="Use elevation data" description="Use terrain elevation data provided by SRTM, ASTER and EU-DEM" type="boolean" default="true"/>
+
+		<way attribute="area">
+			<select value="1"  t="railway" v="platform"/>
+			<select value="1"  t="public_transport" v="platform"/>
+			<select value="0"/>
+		</way>
+
+		<way attribute="access">
+			<select value="-1" t="osmand_change" v="delete"/>
+			<select value="-1" t="highway" v="proposed"/>
+			<select value="-1" t="highway" v="construction"/>
+			<select value="-1" t="construction" v="yes"/>
+
+			<if param="allow_res_streets">
+				<select value="1" t="highway" v="road"/>
+				<select value="1" t="highway" v="residential"/>
+				<select value="1" t="highway" v="unclassified"/>
+				<select value="1" t="highway" v="service"/>
+				<select value="1" t="highway" v="living_street"/>
+			</if>
+
+			<select value="1" t="highway" v="steps">
+				<if param="allow_stairs"/>
+			</select>
+
+			<select value="1" t="route" v="ferry">
+				<if param="allow_ferries"/>
+			</select>
+
+			<if param="allow_width_wheelchair">
+				<gt value1=":width_wheel" value2="$width" type="length">
+					<select value="-1" t="width"/>
+				</gt>
+			</if>
+
+			<if param="allow_private">
+				<select value="1"  t="access" v="private"/>
+			</if>
+			
+			<select value="-1" t="foot" v="no"/>
+			<select value="1"  t="foot" v="yes"/>
+			<select value="1"  t="foot" v="permissive"/>
+			<select value="1"  t="foot" v="designated"/>
+			<select value="1"  t="foot" v="destination"/>
+			<select value="1"  t="foot" v="official"/>
+			<select value="1"  t="foot" v="use_sidepath"/>
+
+			<select value="-1" t="access" v="no"/>
+			<select value="-1" t="access" v="private"/>
+			<select value="1"  t="access" v="yes"/>
+			<select value="1"  t="access" v="permissive"/>
+
+			<select value="-1" t="highway" v="road"/>
+			<select value="-1" t="highway" v="residential"/>
+			<select value="-1" t="highway" v="unclassified"/>
+			<select value="-1" t="highway" v="service"/>
+			<select value="-1" t="highway" v="track"/>
+			<select value="-1" t="highway" v="living_street"/>
+			<select value="-1" t="highway" v="steps"/>
+			<select value="-1" t="route" v="ferry"/>
+
+			<select value="1" t="highway" v="cycleway"/>
+			<select value="1" t="highway" v="path"/>
+			<select value="1" t="highway" v="pedestrian"/>
+			<select value="1" t="highway" v="footway"/>
+			<select value="1" t="railway" v="platform"/>
+			<select value="1" t="public_transport" v="platform"/>
+			<select value="1" t="man_made" v="pier"/>
+			<select value="1" t="highway" v="bridleway"/>
+
+			<select value="-1" t="smoothness" v="very_bad"/>
+			
+			<select value="-1"/>
+		</way>
+
+		<way attribute="priority">
+			<!-- Additional tags -->
+			<select value="0.05" t="foot" v="private"/>
+			<select value="0.05" t="foot" v="destination"/>
+			<select value="1" t="foot" v="designated"/>
+			<select value="1.2" t="sidewalk" v="yes"/>
+			<select value="0.9" t="sidewalk" v="no"/>
+			<select value="0.1" t="foot" v="use_sidepath"/>
+
+			<!-- object tags -->
+			<select value="0.7" t="highway" v="road"/>
+			<select value="0.7" t="highway" v="residential"/>
+			<select value="0.7" t="highway" v="unclassified"/>
+			<select value="0.7" t="highway" v="service"/>
+			<select value="0.7" t="highway" v="living_street"/>
+			<select value="1"   t="route"   v="ferry"/>
+			<select value="1.1" t="highway" v="residential"/>
+
+			<select value="1.2" t="highway" v="steps"/>
+			<select value="1.2" t="highway" v="living_street"/>
+			<select value="1.2" t="highway" v="pedestrian"/>
+			<select value="1.2" t="highway" v="footway"/>
+
+			<select value="1.2" t="smoothness" v="excellent"/>
+			<select value="1.0" t="smoothness" v="good"/>
+			<select value="0.7" t="smoothness" v="intermediate"/>
+			<select value="0.4" t="smoothness" v="bad"/>
+			
+			<select value="1"/>
+		</way>
+
+		<point attribute="obstacle_time">
+			<select value="5" t="highway" v="traffic_signals"/>
+			<select value="10" t="crossing" v="unmarked"/>
+			<select value="5"  t="crossing" v="uncontrolled"/>
+			<select value="30" t="crossing" v="traffic_signals"/>
+			<select value="5" t="highway" v="crossing"/>
+			<select value="5" t="ford" />
+			<select value="5" t="railway" v="crossing" />
+			<select value="5" t="railway" v="level_crossing"/>
+
+			<select value="10" t="kerb" v="raised"/>
+			<select value="5" t="kerb" v="lowered"/>
+			<select value="0" t="kerb" v="flush"/>
+
+			<select value="5" t="smoothness" v="intermediate"/>
+			<select value="15" t="smoothness" v="bad"/>
+			<select value="30" t="smoothness" v="very_bad"/>
+		</point>
+
+		<point attribute="obstacle">
+			<if param="allow_kerb_height">
+				<gt value2=":max_kerb" value1="$kerb:height" type="length">
+					<select value="-1" t="kerb:height"/>
+				</gt>
+			</if>
+
+			<if param="allow_width_wheelchair">
+				<gt value1=":width_wheel" value2="$width" type="length">
+					<select value="-1" t="width"/>
+				</gt>
+			</if>
+
+			<select value="-1" t="foot" v="no"/>
+			<select value="-1"  t="foot" v="private"/>
+			<select value="120"  t="foot" v="destination"/>
+			<select value="0"  t="foot" v="yes"/>
+			<select value="0"  t="foot" v="permissive"/>
+			<select value="0"  t="foot" v="designated"/>
+			<select value="0"  t="foot" v="official"/>
+
+			<select value="-1" t="access" v="no"/>
+			<if param="allow_private">
+				<select value="180"  t="access" v="private"/>
+			</if>
+			<select value="-1"  t="access" v="private"/>
+			<select value="120"  t="access" v="destination"/>
+
+			<select value="0"  t="access" v="yes"/>
+			<select value="0"  t="access" v="permissive"/>
+
+			<select value="120" t="obstacle:wheelchair" v="yes"/>
+
+			<select value="10" t="kerb" v="raised"/>
+			<select value="5" t="kerb" v="lowered"/>
+			<select value="0" t="kerb" v="flush"/>
+
+			<select value="5" t="smoothness" v="intermediate"/>
+			<select value="15" t="smoothness" v="bad"/>
+			<select value="-1" t="smoothness" v="very_bad"/>
+		</point>
+
+		<way attribute="penalty_transition">
+			<select value="0" t="route"   v="ferry"/>
+			<select value="0" t="highway" v="steps"/>
+			<select value="0" t="highway" v="living_street"/>
+			<select value="0" t="highway" v="pedestrian"/>
+			<select value="0" t="highway" v="footway"/>
+			<select value="0" t="sidewalk" v="yes"/>
+			<select value="0" t="sidewalk" v="both"/>
+			<select value="0" t="foot" v="yes"/>
+			<select value="0" t="foot" v="designated"/>
+			<select value="0" t="highway" v="residential"/>
+			<!-- give highway penalty to use mostly footways if available-->
+			<select value="90"/>
+		</way>
+
+		<way attribute="obstacle_srtm_alt_speed">
+			<if param="height_obstacles">
+				<gt value1="-60" value2=":incline">
+					<select value="35"/>
+				</gt>
+				<gt value1="-25" value2=":incline">
+					<select value="30"/>
+				</gt>
+				<gt value1="-17" value2=":incline">
+					<select value="17"/>
+				</gt>
+				<gt value1="-9" value2=":incline">
+					<select value="5"/>
+				</gt>
+				<gt value1="-3" value2=":incline">
+					<select value="1"/>
+				</gt>
+				<gt value1="3" value2=":incline">
+					<select value="1"/>
+				</gt>
+				<gt value1="7" value2=":incline">
+					<select value="4"/>
+				</gt>
+				<gt value1="13" value2=":incline">
+					<select value="8"/>
+				</gt>
+				<gt value1="25" value2=":incline">
+					<select value="10"/>
+				</gt>
+				<select value="15"/>
+			</if>
+		</way>
+
+		<way attribute="oneway">
+		</way>
+
+		<way attribute="speed" type="speed">
+		</way>
+
+	</routingProfile>
+</osmand_routing_config>
