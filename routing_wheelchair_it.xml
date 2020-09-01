@@ -29,6 +29,9 @@
 		<parameter id="max_kerb" name="Massima altezza del cordolo superabile" description="Inserire il valore più prossimo alla massima altezza del cordolo superabile con la sedia a rotelle" type="numeric" values="0,0.019,0.029,0.049" valueDescriptions="0cm,2cm,3cm,5cm"/>
 		<parameter id="allow_width_wheelchair" name="Utilizza limite larghezza sedia a rotelle" description="Utilizza limite larghezza sedia a rotelle" type="boolean"/>
 		<parameter id="width_wheel" name="Larghezza della sedia a rotelle" description="Valore della larghezza della sedia a rotella" type="numeric" values="0.89,1.19,1.49" valueDescriptions="90cm,1.2m,1.5m"/>
+		<parameter id="allow_incline" name="Utilizza limite pendenza" description="Utilizza limite pendenza" type="boolean"/>
+		<parameter id="incline_max" name="Massima pendenza superabile dalla sedia a rotelle" description="Valore di massima pendenza superabile dalla sedia a rotella" type="numeric" values="1,5,8,15" valueDescriptions="1%,5%,8%,15%"/>
+		<parameter id="incline_max_neg" name="Selezionare valore inclinazione come precedente" description="" type="numeric" values="-1,-5,-8,-15" valueDescriptions="1%,5%,8%,15%"/>
 		
 		<parameter id="allow_res_streets" name="Consenti di utilizzare le strade urbane" description="Consenti al router di creare un percorso che consideri anche le strade urbane e non solamente i marciapiedi" type="boolean" default="false"/>
 		
@@ -68,6 +71,15 @@
 			<if param="allow_width_wheelchair">
 				<gt value1=":width_wheel" value2="$width" type="length">
 					<select value="-1" t="width"/>
+				</gt>
+			</if>
+
+			<if param="allow_incline">
+				<gt value1=":incline_max_neg" value2="$incline">
+					<select value="-1" t="incline"/>
+				</gt>
+				<gt value1="$incline" value2=":incline_max">
+					<select value="-1" t="incline"/>
 				</gt>
 			</if>
 
@@ -171,6 +183,15 @@
 			<if param="allow_width_wheelchair">
 				<gt value1=":width_wheel" value2="$width" type="length">
 					<select value="-1" t="width"/>
+				</gt>
+			</if>
+
+			<if param="allow_incline">
+				<gt value1=":incline_max_neg" value2="$incline">
+					<select value="-1" t="incline"/>
+				</gt>
+				<gt value1="$incline" value2=":incline_max">
+					<select value="-1" t="incline"/>
 				</gt>
 			</if>
 

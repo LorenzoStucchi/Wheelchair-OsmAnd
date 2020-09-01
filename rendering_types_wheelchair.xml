@@ -5994,7 +5994,8 @@
 
 		<routing_type tag="kerb" mode="amend"/>
 		<routing_type tag="kerb:height" mode="amend" base="true" type="length"/>
-		<routing_type tag="obstacle:wheelchair" node="amend"/>
+		<routing_type tag="obstacle:wheelchair" mode="amend"/>
+		<routing_type tag="incline" mode="amend"/>
 
 	</category>
 </osmand_types>
